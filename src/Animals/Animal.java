@@ -4,6 +4,7 @@
  */
 package Animals;
 
+import Utils.UtilDate;
 import java.time.LocalDate;
 
 /**
@@ -32,6 +33,10 @@ public class Animal {
     public LocalDate getBirthDate() {
         return birthDate;
     }
+    
+    public int getAge(){
+        return UtilDate.calculateAge(birthDate);
+    }
 
     public Zone getZone() {
         return zone;
@@ -46,14 +51,14 @@ public class Animal {
             this.id = id;
         this.name = name;
         this.species = species;
-        if (!birthDate.isAfter(LocalDate.now()))
+        if (UtilDate.isNotFutureDate(birthDate))
             this.birthDate = birthDate;
         this.zone = Zone.CONSERVATION_AND_RESCUE;
     }
 
     @Override
     public String toString() {
-        return "Animal{" + "id=" + id + ", name=" + name + ", species=" + species + ", birthDate=" + birthDate + ", zone=" + zone + '}';
+        return "Animal{" + "id=" + id + ", name=" + name + ", species=" + species + ", birthDate=" + birthDate + ", age="+getAge() + ", zone=" + zone + '}';
     }
     
     

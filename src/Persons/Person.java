@@ -4,6 +4,7 @@
  */
 package Persons;
 
+import Utils.UtilDate;
 import java.time.LocalDate;
 
 /**
@@ -27,6 +28,10 @@ public abstract class Person {
     public LocalDate getBirthDate() {
         return birthDate;
     }
+    
+    public int getAge(){
+        return UtilDate.calculateAge(birthDate);
+    }
 
     public String getPhone() {
         return phone;
@@ -44,7 +49,7 @@ public abstract class Person {
     public Person(String id, String name, LocalDate birthDate, String phone) {
         this.id = id;
         this.name = name;
-        if (!birthDate.isAfter(LocalDate.now()))
+        if (UtilDate.isNotFutureDate(birthDate))
             this.birthDate = birthDate;
         if(validatePhone(phone))
             this.phone = phone;
@@ -52,7 +57,7 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "id=" + id + ", name=" + name + ", birthDate=" + birthDate + ", phone=" + phone;
+        return "id=" + id + ", name=" + name + ", birthDate=" + birthDate + ", age="+getAge() + ", phone=" + phone;
     }
     
     
