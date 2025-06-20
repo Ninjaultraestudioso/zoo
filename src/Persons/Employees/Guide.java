@@ -5,6 +5,8 @@
 package Persons.Employees;
 
 import Animals.Animal;
+import Persons.Visitors.Visitor;
+import Tours.Tour;
 import java.time.LocalDate;
 
 /**
@@ -13,16 +15,20 @@ import java.time.LocalDate;
  */
 public class Guide extends Employee {
     private String languages[];
-    private String tours[];
+    private Tour tours[];
 
     public String[] getLanguages() {
         return languages;
     }
 
+    public Tour[] getTours() {
+        return tours;
+    }
+    
     public Guide(String id, String name, LocalDate birthDate, String phone, Double salary) {
         super(id, name, birthDate, phone, salary);
         languages=new String[15];
-        tours=new String[30];
+        tours=new Tour[30];
     }
     
     public void addLanguage(String language){
@@ -34,7 +40,7 @@ public class Guide extends Employee {
         }
     }
     
-    public void doATour(String visitors[]){
+    public void doATour(Visitor visitors[]){
         recordTour(visitors);
     }
     
@@ -42,11 +48,10 @@ public class Guide extends Employee {
         return "Este es: "+ animal;
     }
     
-    private void recordTour(String visitors[]){
+    private void recordTour(Visitor visitors[]){
         for (int i = 0; i < 30; i++) {
             if(tours[i]==null){
-                tours[i]="Se realizo un tour el dia "+LocalDate.now()+" con "+
-                        visitors.length + " personas";
+                tours[i]=new Tour(this,visitors);
                 break;
             }
         }
@@ -54,7 +59,7 @@ public class Guide extends Employee {
 
     @Override
     public String toString() {
-        return "Guide{" + super.toString()+ ", languages=" + languages.length + ", tours=" + tours.length + '}';
+        return "Guide{" + super.toString()+ ", languages=" + languages.length + '}';
     }
     
     
