@@ -5,6 +5,7 @@
 package Persons.Employees;
 
 import Persons.Person;
+import Utils.UtilDate;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -29,13 +30,9 @@ public abstract class Employee extends Person {
     }
 
     public Employee(String id, String name, LocalDate birthDate, String phone, Double salary) {
-        super(id,name,isLegalAge(birthDate)?birthDate:null,phone);
+        super(id,name,UtilDate.isLegalAge(birthDate)?birthDate:null,phone);
         if(validateSalary(salary))
             this.salary = salary;
-    }
-    
-    private static boolean isLegalAge(LocalDate date){
-        return Period.between(date, LocalDate.now()).getYears()>=18;
     }
 
     @Override
